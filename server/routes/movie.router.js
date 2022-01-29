@@ -23,10 +23,10 @@ router.get('/:id', (req, res) => {
 
   const queryText = `
       SELECT
-        "movies".title, "movies".poster, "movies".description, STRING_AGG("genres".name, ', ') AS "genres" 
+        "movies".title, "movies".poster, "movies".description, ARRAY_AGG("genres".name) AS "genres" 
       FROM "movies"
       JOIN "movies_genres" 
-        ON "movies".id = "movies_genres".id
+        ON "movies".id = "movies_genres".movie_id
       JOIN "genres" 
         ON "movies_genres".genre_id = "genres".id
       WHERE "movies".id = $1

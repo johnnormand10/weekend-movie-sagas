@@ -16,6 +16,8 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
 
     yield takeEvery('GET_DETAILS', getDetails);
+
+    yield takeEvery('ADD_MOVIE', addMovie);
 }
 
 function* fetchAllMovies() {
@@ -37,7 +39,7 @@ function* getDetails(action){
         //checking if i'm getting data back
         console.log('response of index 0 in getDetails in index is:', response.data[0]);
         yield put({
-            type: 'DISPLAY_MOVIE_DETAILS',
+            type: 'DISPLAY_MOVIE_DETAIL',
             payload: response.data[0]
         })
     }
@@ -46,11 +48,27 @@ function* getDetails(action){
     }
 }
 
+function* addMovie(action){
+    try{
+        const newMovie = action.payload;
+        //checking if i'm getting the correct data
+        console.log('newMovie in index.js is:', newMovie);
+        yield axios.post('/api/movie', newMovie)
+
+        yield put({
+            type: 'FETCH_MOVIES'
+        })
+    }
+    catch(err){
+        console.error('ERROR in addMovie in index', err);
+    }
+}
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
 //Used to store movies details of the selected movie
-const moviesDetails = (state = {}, action) => {
+const moviesDetails = (state = [], action) => {
     if(action.type === 'DISPLAY_MOVIE_DETAIL'){
         return action.payload;
     }
