@@ -34,18 +34,23 @@ function MovieList() {
         history.push('/details');
     }
 
+    const addMovie = () => {
+        history.push('/add');
+    }
+
     return (
         <div>
             <h1>MovieList</h1>
+            <button onClick={addMovie}>Add A New Movie</button>
             <section className="movies">
                 <Grid>
                 {movies.map(movie => {
                     return (
-                        <Grid item sm={3}>
+                        <Grid item sm={4}>
                             <Paper>
                                 <Card key={movie.id} onClick={() => handleClick(movie.id)}>
                                     <CardActionArea>
-                                        <Typography gutterButton variant="h4" component="h2">{movie.title}</Typography>
+                                        <Typography variant="h4" component="h2">{movie.title}</Typography>
                                         <img src={movie.poster} alt={movie.title} />
                                     </CardActionArea>
                                 </Card>
