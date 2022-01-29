@@ -23,7 +23,7 @@ function MovieList() {
             payload: selectedMovie
         })
         //pushing to the details page
-        history.push('/detail');
+        history.push('/details');
     }
 
     return (
