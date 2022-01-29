@@ -17,13 +17,21 @@ function AddMovie(){
         title: '',
         poster: '',
         description: '',
-        genre: ''
+        genre_id: ''
     })
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('submit button in addMovie clicked');
         console.log('newMovie submitted is:', newMovie);
+
+        dispatch({
+            type: 'ADD_MOVIE',
+            payload: newMovie
+        })
+
+        history.push('/');
+        setNewMovie('');
     }
 
     const cancelClick = () => {
@@ -57,12 +65,12 @@ function AddMovie(){
                     required={true}
                 />
 
-                <InputLabel id="demo-simple-select-label">Genre</InputLabel>
+                <InputLabel id="demo-simple-select-label" required={true}>Genre</InputLabel>
 
                 <Select
                     labelId="genre selection"
                     id="deme-simple-select"
-                    onChange={(event) => setNewMovie({...newMovie, genre:event.target.value})}
+                    onChange={(event) => setNewMovie({...newMovie, genre_id:event.target.value})}
                     required={true}
                 >
                     <MenuItem value={1}>Adventure</MenuItem>

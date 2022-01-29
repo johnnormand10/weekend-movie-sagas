@@ -43,10 +43,10 @@ function MovieList() {
             <h1>MovieList</h1>
             <button onClick={addMovie}>Add A New Movie</button>
             <section className="movies">
-                <Grid>
+                <Grid container justify = "center">
                 {movies.map(movie => {
                     return (
-                        <Grid item sm={4}>
+                        <Grid item xs ={12} sm={8} md={4}>
                             <Paper>
                                 <Card key={movie.id} onClick={() => handleClick(movie.id)}>
                                     <CardActionArea>
